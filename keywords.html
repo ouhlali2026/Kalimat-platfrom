@@ -297,7 +297,7 @@
             opacity: 0.9;
         }
 
-        /* تحسينات للجوال */
+        /* تحسينات الجوال */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -305,10 +305,6 @@
 
             header h1 {
                 font-size: 2em;
-            }
-
-            header p {
-                font-size: 1em;
             }
 
             .content-box {
@@ -337,17 +333,6 @@
             .keyword-chip {
                 width: 100%;
                 text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8em;
-            }
-
-            nav ul li a {
-                padding: 8px 15px;
-                font-size: 0.9em;
             }
         }
     </style>
@@ -413,46 +398,92 @@
     </div>
 
     <script>
-        // قائمة النيشات المحتملة
-        const possibleNiches = [
-            { id: 'money', name: '💰 الربح من الإنترنت', file: 'money-keywords.json' },
-            { id: 'cooking', name: '🍳 الطبخ', file: 'cooking-keywords.json' },
-            { id: 'tech', name: '💻 التقنية', file: 'tech-keywords.json' },
-            { id: 'beauty', name: '✨ التجميل', file: 'beauty-keywords.json' },
-            { id: 'sports', name: '⚽ الرياضة', file: 'sports-keywords.json' },
-            { id: 'travel', name: '✈️ السفر', file: 'travel-keywords.json' },
-            { id: 'education', name: '📚 التعليم', file: 'education-keywords.json' },
-            { id: 'health', name: '🏥 الصحة', file: 'health-keywords.json' },
-            { id: 'fashion', name: '👗 الموضة', file: 'fashion-keywords.json' },
-            { id: 'parenting', name: '👶 تربية الأطفال', file: 'parenting-keywords.json' }
-        ];
-
         // المتغيرات العامة
         let availableNiches = [];
         let nichesData = {};
         let currentNiche = null;
         let currentType = 'main';
 
+        // أسماء ملفات JSON الممكنة (أسماء عامة)
+        const possibleFiles = [
+            'money-keywords.json',
+            'apps-keywords.json', 
+            'cooking-keywords.json',
+            'tech-keywords.json',
+            'beauty-keywords.json',
+            'sports-keywords.json',
+            'travel-keywords.json',
+            'education-keywords.json',
+            'health-keywords.json',
+            'fashion-keywords.json',
+            'parenting-keywords.json',
+            'business-keywords.json',
+            'gaming-keywords.json',
+            'marketing-keywords.json',
+            'design-keywords.json',
+            'writing-keywords.json',
+            'photography-keywords.json',
+            'music-keywords.json',
+            'art-keywords.json',
+            'crafts-keywords.json'
+        ];
+
+        // دالة تحويل اسم الملف إلى اسم عرض جميل
+        function getNicheNameFromFile(filename) {
+            const nameMap = {
+                'money': '💰 الربح من الإنترنت',
+                'apps': '📱 تطبيقات الربح',
+                'cooking': '🍳 الطبخ',
+                'tech': '💻 التقنية',
+                'beauty': '✨ التجميل',
+                'sports': '⚽ الرياضة',
+                'travel': '✈️ السفر',
+                'education': '📚 التعليم',
+                'health': '🏥 الصحة',
+                'fashion': '👗 الموضة',
+                'parenting': '👶 تربية الأطفال',
+                'business': '💼 الأعمال',
+                'gaming': '🎮 الألعاب',
+                'marketing': '📈 التسويق',
+                'design': '🎨 التصميم',
+                'writing': '✍️ الكتابة',
+                'photography': '📸 التصوير',
+                'music': '🎵 الموسيقى',
+                'art': '🖼️ الفن',
+                'crafts': '🧶 الحرف اليدوية'
+            };
+            
+            // استخراج الجزء الأول من اسم الملف (قبل -keywords)
+            const key = filename.replace('-keywords.json', '');
+            return nameMap[key] || `📁 ${key}`;
+        }
+
         // بدء التحميل
         window.onload = function() {
             loadAllNiches();
         };
 
-        // تحميل جميع النيشات الموجودة
+        // تحميل جميع ملفات JSON الموجودة
         async function loadAllNiches() {
             const nichesList = document.getElementById('nichesList');
             
-            for (let niche of possibleNiches) {
+            // تجربة تحميل كل ملف
+            for (let file of possibleFiles) {
                 try {
-                    const response = await fetch(niche.file);
+                    const response = await fetch(file);
                     if (response.ok) {
                         const data = await response.json();
-                        if (data[niche.id]) {
-                            nichesData[niche.id] = data[niche.id];
+                        
+                        // استخراج المفتاح الرئيسي (أول مفتاح في الكائن)
+                        const mainKey = Object.keys(data)[0];
+                        
+                        if (mainKey && data[mainKey]) {
+                            nichesData[mainKey] = data[mainKey];
                             availableNiches.push({
-                                id: niche.id,
-                                name: niche.name,
-                                data: data[niche.id]
+                                id: mainKey,
+                                name: getNicheNameFromFile(file),
+                                file: file,
+                                data: data[mainKey]
                             });
                         }
                     }
@@ -461,7 +492,7 @@
                 }
             }
 
-            // عرض الأزرار
+            // عرض الأزرار حسب الملفات الموجودة
             if (availableNiches.length > 0) {
                 let html = '';
                 availableNiches.forEach((niche, index) => {
@@ -471,9 +502,11 @@
                 nichesList.innerHTML = html;
 
                 // اختيار أول نيش
-                selectNiche(availableNiches[0].id);
+                if (availableNiches.length > 0) {
+                    selectNiche(availableNiches[0].id);
+                }
             } else {
-                nichesList.innerHTML = '<div class="empty-message">لا توجد مجالات مضافة حالياً</div>';
+                nichesList.innerHTML = '<div class="empty-message">لا توجد ملفات JSON مضافة. أضف ملفاً وستظهر تلقائياً</div>';
             }
         }
 
@@ -534,7 +567,8 @@
 
             let html = '';
             keywords.forEach(keyword => {
-                html += `<span class="keyword-chip" onclick="copyKeyword('${keyword.replace(/'/g, "\\'")}')">${keyword}</span>`;
+                const cleanKeyword = keyword.replace(/'/g, "\\'");
+                html += `<span class="keyword-chip" onclick="copyKeyword('${cleanKeyword}')">${keyword}</span>`;
             });
             
             container.innerHTML = html;
@@ -549,7 +583,7 @@
             });
         }
 
-        // البحث الشامل
+        // البحث الشامل في جميع المجالات
         async function searchAllKeywords() {
             const query = document.getElementById('searchInput').value.trim().toLowerCase();
             if (!query) {
@@ -559,14 +593,13 @@
 
             document.getElementById('keywordsContainer').innerHTML = '<div class="loading-message">جاري البحث في جميع المجالات...</div>';
 
-            // البحث في جميع البيانات
             let results = [];
             for (let id in nichesData) {
                 const data = nichesData[id];
                 results = results.concat(
-                    (data.main_keywords || []).filter(k => k.includes(query)),
-                    (data.long_tail_keywords || []).filter(k => k.includes(query)),
-                    (data.questions || []).filter(k => k.includes(query))
+                    (data.main_keywords || []).filter(k => k && k.includes(query)),
+                    (data.long_tail_keywords || []).filter(k => k && k.includes(query)),
+                    (data.questions || []).filter(k => k && k.includes(query))
                 );
             }
 
