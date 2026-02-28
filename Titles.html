@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد العناوين - منصة كلمات</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .generator-box {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: 40px auto;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        .generate-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.3s;
+        }
+        .generate-btn:hover {
+            transform: scale(1.02);
+        }
+        .results {
+            margin-top: 30px;
+            display: none;
+        }
+        .title-item {
+            background: #f8f9fa;
+            border-right: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 0 8px 8px 0;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+        .title-item:hover {
+            background: #f0f2f5;
+        }
+        .copy-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 5px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .copy-btn:hover {
+            background: #5a6fd8;
+        }
+        .note {
+            text-align: center;
+            color: #666;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>منصة كلمات</h1>
+            <p>أدوات ذكية لصناع المحتوى</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="titles.html" class="active">مولد العناوين</a></li>
+                <li><a href="keywords.html">بنك الكلمات</a></li>
+                <li><a href="niches.html">دليل النيشات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">🎯 مولد عناوين احترافية</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 40px;">أدخل موضوعك واحصل على 10 عناوين جاهزة</p>
+
+            <div class="generator-box">
+                <div class="form-group">
+                    <label>الموضوع (مثال: طبخ، ربح من الإنترنت، تقنية)</label>
+                    <input type="text" id="topic" placeholder="اكتب موضوعك هنا...">
+                </div>
+
+                <div class="form-group">
+                    <label>اختر المنصة</label>
+                    <select id="platform">
+                        <option value="youtube">يوتيوب</option>
+                        <option value="facebook">فيسبوك</option>
+                        <option value="tiktok">تيك توك</option>
+                        <option value="blog">مدونة</option>
+                    </select>
+                </div>
+
+                <button class="generate-btn" onclick="generateTitles()">🔮 توليد العناوين</button>
+
+                <div class="results" id="results">
+                    <h3 style="margin-bottom: 15px;">العناوين المقترحة:</h3>
+                    <div id="titlesList"></div>
+                    <p class="note">اضغط على أي عنوان لنسخه</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 منصة كلمات - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        // قوالب العناوين (سيتم تحديثها لاحقاً بملف JSON)
+        const templates = {
+            youtube: [
+                "كيفية {topic} في {number} خطوات",
+                "أفضل {topic} للمبتدئين",
+                "{topic}: الدليل الشامل",
+                "أسرار {topic} التي لا تخبرك بها أحد",
+                "أخطاء {topic} تجنبها",
+                "أسرع طريقة لـ {topic}",
+                "{topic} في المنزل بسهولة",
+                "وصفة {topic} الأصلية",
+                "تحدي {topic} مع العائلة",
+                "مقارنة: أفضل {topic} في 2026"
+            ],
+            facebook: [
+                "هل تعلم أن {topic}؟",
+                "3 حقائق عن {topic} ستذهلك",
+                "شاركنا رأيك في {topic}",
+                "ما هو رأيك في {topic}؟",
+                "فوائد {topic} التي لا تعرفها",
+                "كيف تبدأ في {topic} اليوم",
+                "أخطاء شائعة في {topic}",
+                "قصص نجاح مع {topic}",
+                "استفتاء: من يحب {topic}؟",
+                "نصائح ذهبية عن {topic}"
+            ],
+            tiktok: [
+                "{topic} في 60 ثانية",
+                "تحدي {topic}",
+                "حيل {topic} السريعة",
+                "أغرب حقائق {topic}",
+                "تحول {topic} خلال سنة",
+                "مقلب {topic} مع الأصدقاء",
+                "تعلم {topic} بسهولة",
+                "مراجعة سريعة لـ {topic}",
+                "مقارنة {topic} vs {topic}",
+                "يوم في حياة {topic}"
+            ],
+            blog: [
+                "الدليل الشامل لـ {topic}",
+                "{topic}: كل ما تحتاج معرفته",
+                "10 نصائح لتحسين {topic}",
+                "تاريخ وتطور {topic}",
+                "فوائد وأضرار {topic}",
+                "كيف تختار أفضل {topic}",
+                "مستقبل {topic} في السنوات القادمة",
+                "تجربتي الشخصية مع {topic}",
+                "أهم الأسئلة عن {topic}",
+                "موارد مجانية لتعلم {topic}"
+            ]
+        };
+
+        function generateTitles() {
+            const topic = document.getElementById('topic').value.trim();
+            if (!topic) {
+                alert('الرجاء إدخال موضوع');
+                return;
+            }
+
+            const platform = document.getElementById('platform').value;
+            const platformTemplates = templates[platform];
+            const numbers = [3, 5, 7, 10, 15, 20, 25, 30, 50, 100];
+            
+            let titles = [];
+            for (let i = 0; i < 10; i++) {
+                let template = platformTemplates[i % platformTemplates.length];
+                let title = template.replace('{topic}', topic);
+                
+                // استبدال {number} برقم عشوائي
+                if (title.includes('{number}')) {
+                    const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
+                    title = title.replace('{number}', randomNumber);
+                }
+                
+                titles.push(title);
+            }
+
+            // عرض النتائج
+            const resultsDiv = document.getElementById('results');
+            const titlesList = document.getElementById('titlesList');
+            titlesList.innerHTML = '';
+
+            titles.forEach((title, index) => {
+                const titleItem = document.createElement('div');
+                titleItem.className = 'title-item';
+                titleItem.innerHTML = `
+                    <span style="font-weight: bold; color: #667eea;">${index + 1}.</span>
+                    ${title}
+                    <button class="copy-btn" onclick="copyTitle('${title.replace(/'/g, "\\'")}')">نسخ</button>
+                `;
+                titlesList.appendChild(titleItem);
+            });
+
+            resultsDiv.style.display = 'block';
+        }
+
+        function copyTitle(title) {
+            navigator.clipboard.writeText(title).then(() => {
+                alert('تم نسخ العنوان: ' + title);
+            }).catch(() => {
+                alert('فشل النسخ، يمكنك تحديد العنوان ونسخه يدوياً');
+            });
+        }
+    </script>
+</body>
+</html>
