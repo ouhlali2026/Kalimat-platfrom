@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل النيشات - منصة كلمات</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .niches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        .niche-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .niche-card:hover {
+            transform: translateY(-5px);
+        }
+        .niche-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+        }
+        .niche-header h3 {
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        .niche-category {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        .niche-body {
+            padding: 20px;
+        }
+        .competition {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .low {
+            background: #d4edda;
+            color: #155724;
+        }
+        .medium {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .high {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .earnings {
+            background: #e8f4fd;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+        .example {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 5px;
+            padding-right: 15px;
+            position: relative;
+        }
+        .example::before {
+            content: "•";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            right: 0;
+        }
+        .keywords-tags {
+            margin-top: 15px;
+        }
+        .tag {
+            display: inline-block;
+            background: #f0f2f5;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin: 3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>منصة كلمات</h1>
+            <p>أدوات ذكية لصناع المحتوى</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">الرئيسية</a></li>
+                <li><a href="titles.html">مولد العناوين</a></li>
+                <li><a href="keywords.html">بنك الكلمات</a></li>
+                <li><a href="niches.html" class="active">دليل النيشات</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 20px;">📊 دليل النيشات المربحة</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">اختر مجالاً مناسباً وابدأ مشوارك الربحي</p>
+
+            <div style="text-align: center; margin-bottom: 30px;">
+                <select id="categoryFilter" onchange="filterNiches()" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+                    <option value="all">جميع المجالات</option>
+                    <option value="cooking">طبخ</option>
+                    <option value="tech">تقنية</option>
+                    <option value="money">ربح من الإنترنت</option>
+                    <option value="beauty">تجميل</option>
+                    <option value="sports">رياضة</option>
+                </select>
+            </div>
+
+            <div class="niches-grid" id="nichesGrid">
+                <!-- سيتم تعبئتها عبر JavaScript -->
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2026 منصة كلمات - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        // قاعدة بيانات النيشات (يمكن تحديثها لاحقاً)
+        const nichesDB = [
+            {
+                name: "وصفات رمضان",
+                category: "cooking",
+                competition: "medium",
+                earnings: "800-1500$ شهرياً",
+                examples: [
+                    "قناة 'سحور وعزومة' (400K مشترك)",
+                    "صفحة 'طبخ أم محمد' (200K متابع)"
+                ],
+                keywords: ["وصفات رمضان", "سحور سريع", "حلويات العيد", "فطار رمضان", "أكلات رمضانية"]
+            },
+            {
+                name: "مراجعات هواتف ذكية",
+                category: "tech",
+                competition: "high",
+                earnings: "1000-2000$ شهرياً",
+                examples: [
+                    "قناة 'تقنية تك' (600K مشترك)",
+                    "حساب 'هواتف اليوم' (150K متابع)"
+                ],
+                keywords: ["مراجعة آيفون", "أفضل هاتف أندرويد", "مقارنة هواتف", "سعر ومواصفات", "جوالات جديدة"]
+            },
+            {
+                name: "التسويق بالعمولة للمبتدئين",
+                category: "money",
+                competition: "low",
+                earnings: "500-1200$ شهرياً",
+                examples: [
+                    "قناة 'أرباح أونلاين' (200K مشترك)",
+                    "مجموعة 'مسوقون عرب' (50K عضو)"
+                ],
+                keywords: ["تسويق بالعمولة", "ربح من الإنترنت", "أفكار مشاريع", "منتجات للترويج", "عمولات عالية"]
+            },
+            {
+                name: "العناية بالبشرة الدهنية",
+                category: "beauty",
+                competition: "medium",
+                earnings: "600-1000$ شهرياً",
+                examples: [
+                    "قناة 'جمال بشرتك' (300K مشترك)",
+                    "حساب 'كريمات طبيعية' (180K متابع)"
+                ],
+                keywords: ["بشرة دهنية", "علاج حب الشباب", "كريمات طبيعية", "روتين العناية", "ماسكات للوجه"]
+            },
+            {
+                name: "تمارين منزلية بدون أجهزة",
+                category: "sports",
+                competition: "low",
+                earnings: "400-800$ شهرياً",
+                examples: [
+                    "قناة 'رياضة في البيت' (150K مشترك)",
+                    "حساب 'تحدي اللياقة' (90K متابع)"
+                ],
+                keywords: ["تمارين منزلية", "رياضة بدون أجهزة", "تخسيس البطن", "تمارين شد الجسم", "لياقة بدنية"]
+            },
+            {
+                name: "وصفات أكل صحي للأطفال",
+                category: "cooking",
+                competition: "low",
+                earnings: "500-900$ شهرياً",
+                examples: [
+                    "قناة 'صحة أطفالي' (120K مشترك)",
+                    "صفحة 'طبخ للأطفال' (80K متابع)"
+                ],
+                keywords: ["أكل صحي للأطفال", "وصفات للأطفال", "تغذية سليمة", "وجبات مدرسية", "أكل يحبه الأطفال"]
+            },
+            {
+                name: "شروحات برمجة للمبتدئين",
+                category: "tech",
+                competition: "medium",
+                earnings: "700-1300$ شهرياً",
+                examples: [
+                    "قناة 'مبرمج عربي' (400K مشترك)",
+                    "حساب 'تعلم بايثون' (100K متابع)"
+                ],
+                keywords: ["تعلم البرمجة", "دروس بايثون", "تطوير مواقع", "مبرمج مبتدئ", "مشاريع برمجية"]
+            },
+            {
+                name: "الربح من اليوتيوب",
+                category: "money",
+                competition: "medium",
+                earnings: "600-1100$ شهرياً",
+                examples: [
+                    "قناة 'يوتيوبر محترف' (250K مشترك)",
+                    "مجموعة 'أرباح يوتيوب' (40K عضو)"
+                ],
+                keywords: ["الربح من اليوتيوب", "زيادة المشاهدات", "شروط أدسنس", "أفكار قنوات", "تحقيق الأرباح"]
+            }
+        ];
+
+        function displayNiches(filter = 'all') {
+            const grid = document.getElementById('nichesGrid');
+            grid.innerHTML = '';
+
+            const filtered = filter === 'all' ? nichesDB : nichesDB.filter(n => n.category === filter);
+
+            filtered.forEach(niche => {
+                const card = document.createElement('div');
+                card.className = 'niche-card';
+
+                const competitionClass = niche.competition === 'low' ? 'low' : (niche.competition === 'medium' ? 'medium' : 'high');
+                const competitionText = niche.competition === 'low' ? 'منافسة منخفضة' : (niche.competition === 'medium' ? 'منافسة متوسطة' : 'منافسة عالية');
+
+                let examplesHTML = '';
+                niche.examples.forEach(ex => {
+                    examplesHTML += `<div class="example">${ex}</div>`;
+                });
+
+                let keywordsHTML = '';
+                niche.keywords.forEach(kw => {
+                    keywordsHTML += `<span class="tag">${kw}</span>`;
+                });
+
+                card.innerHTML = `
+                    <div class="niche-header">
+                        <h3>${niche.name}</h3>
+                        <div class="niche-category">${niche.category === 'cooking' ? 'طبخ' : niche.category === 'tech' ? 'تقنية' : niche.category === 'money' ? 'ربح' : niche.category === 'beauty' ? 'تجميل' : 'رياضة'}</div>
+                    </div>
+                    <div class="niche-body">
+                        <span class="competition ${competitionClass}">${competitionText}</span>
+                        <div class="earnings">💰 الأرباح المتوقعة: ${niche.earnings}</div>
+                        <div style="margin: 10px 0; font-weight: 600;">قنوات ناجحة في هذا المجال:</div>
+                        ${examplesHTML}
+                        <div class="keywords-tags">
+                            <strong>كلمات مفتاحية مقترحة:</strong><br>
+                            ${keywordsHTML}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterNiches() {
+            const filter = document.getElementById('categoryFilter').value;
+            displayNiches(filter);
+        }
+
+        // عرض الكل عند تحميل الصفحة
+        displayNiches('all');
+    </script>
+</body>
+</html>
