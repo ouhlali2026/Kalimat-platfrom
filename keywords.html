@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بنك الكلمات - منصة كلمات</title>
+    <title>بحث الكلمات المفتاحية - منصة كلمات</title>
     <style>
         * {
             margin: 0;
@@ -15,107 +15,48 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
+            width: 100%;
+            max-width: 1000px;
         }
 
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: white;
+            border-radius: 30px 30px 0 0;
             padding: 40px 20px;
             text-align: center;
-            border-radius: 30px;
-            margin-bottom: 25px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.1);
         }
 
         header h1 {
-            font-size: 3em;
-            margin-bottom: 15px;
+            font-size: 2.5em;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            font-weight: 800;
+            margin-bottom: 10px;
         }
 
         header p {
-            font-size: 1.2em;
             color: #666;
-        }
-
-        nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 15px 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 600;
-            padding: 10px 25px;
-            border-radius: 30px;
-            transition: all 0.3s;
-            font-size: 1.1em;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102,126,234,0.3);
-        }
-
-        .content-box {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 2.2em;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .subtitle {
-            color: #666;
-            margin-bottom: 40px;
-            font-size: 1.1em;
         }
 
         .search-section {
-            background: #f8f9fa;
-            border-radius: 50px;
-            padding: 10px;
-            margin-bottom: 30px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
         .search-box {
             display: flex;
             gap: 10px;
+            max-width: 700px;
+            margin: 0 auto;
             flex-wrap: wrap;
         }
 
@@ -124,10 +65,9 @@
             min-width: 250px;
             padding: 18px 25px;
             border: 2px solid #e0e0e0;
-            border-radius: 50px;
+            border-radius: 60px;
             font-size: 1.1em;
             transition: all 0.3s;
-            background: white;
         }
 
         .search-box input:focus {
@@ -141,7 +81,7 @@
             color: white;
             border: none;
             padding: 0 40px;
-            border-radius: 50px;
+            border-radius: 60px;
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
@@ -151,28 +91,29 @@
 
         .search-box button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102,126,234,0.3);
+            box-shadow: 0 10px 25px rgba(102,126,234,0.4);
         }
 
         .stats-bar {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            background: white;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #f0f2f5;
         }
 
-        .stat-item {
-            background: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            font-weight: 600;
+        .stats-bar span {
+            background: #f8f9fa;
+            padding: 8px 20px;
+            border-radius: 40px;
             color: #667eea;
+            font-weight: 600;
         }
 
         .results-section {
-            margin-top: 30px;
+            background: white;
+            border-radius: 0 0 30px 30px;
+            padding: 30px;
+            min-height: 300px;
         }
 
         .results-header {
@@ -181,12 +122,13 @@
             align-items: center;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            gap: 15px;
         }
 
         .results-count {
-            background: white;
-            padding: 10px 20px;
-            border-radius: 30px;
+            background: #f0f2f5;
+            padding: 8px 20px;
+            border-radius: 40px;
             font-weight: 600;
             color: #333;
         }
@@ -194,81 +136,61 @@
         .results-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
         }
 
         .keyword-card {
-            background: white;
-            padding: 15px 25px;
+            background: #f8f9fa;
+            padding: 12px 20px;
             border-radius: 40px;
             border: 1px solid #e0e0e0;
             cursor: pointer;
             transition: all 0.3s;
-            font-size: 1em;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             text-align: center;
+            font-size: 0.95em;
         }
 
         .keyword-card:hover {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-color: transparent;
             transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+            border-color: transparent;
         }
 
         .keyword-source {
-            font-size: 0.8em;
+            font-size: 0.75em;
             color: #999;
-            margin-top: 5px;
+            margin-top: 4px;
         }
 
-        .loading-message {
-            text-align: center;
-            padding: 60px;
-            color: #666;
-            font-size: 1.2em;
+        .keyword-card:hover .keyword-source {
+            color: rgba(255,255,255,0.8);
         }
 
         .empty-message {
             text-align: center;
             padding: 60px;
             color: #999;
-            font-size: 1.2em;
+            font-size: 1.1em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
         }
 
         footer {
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             color: white;
-            margin-top: 30px;
-            font-size: 1.1em;
-            opacity: 0.9;
+            margin-top: 20px;
         }
 
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            header h1 {
-                font-size: 2em;
-            }
-
-            .content-box {
-                padding: 20px;
-            }
-
-            .search-box button {
-                width: 100%;
-                padding: 15px;
-            }
-
-            .stat-item {
-                width: 100%;
-                text-align: center;
-            }
+        @media (max-width: 600px) {
+            header h1 { font-size: 2em; }
+            .search-box button { width: 100%; }
         }
     </style>
 </head>
@@ -276,54 +198,40 @@
     <div class="container">
         <header>
             <h1>🔑 منصة كلمات</h1>
-            <p>ابحث عن آلاف الكلمات المفتاحية في جميع المجالات</p>
+            <p>اكتب أي كلمة وابحث في جميع المجالات</p>
         </header>
 
-        <nav>
-            <ul>
-                <li><a href="index.html">الرئيسية</a></li>
-                <li><a href="titles.html">مولد العناوين</a></li>
-                <li><a href="keywords.html" class="active">بنك الكلمات</a></li>
-                <li><a href="niches.html">دليل النيشات</a></li>
-            </ul>
-        </nav>
-
-        <div class="content-box">
-            <h2>🔍 بنك الكلمات المفتاحية</h2>
-            <p class="subtitle">اكتب أي كلمة وستحصل على نتائج من جميع المجالات</p>
-
-            <div class="stats-bar" id="statsBar">
-                <div class="stat-item">📊 جاري تحميل البيانات...</div>
+        <div class="search-section">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="مثال: طبخ، ربح، تطبيقات، عمل..." autofocus>
+                <button onclick="searchAll()">🔍 بحث</button>
             </div>
+        </div>
 
-            <div class="search-section">
-                <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="ابحث عن كلمة... (مثال: طبخ، تسويق، تطبيقات)" autofocus>
-                    <button onclick="searchAllKeywords()">🔍 بحث</button>
-                </div>
+        <div class="stats-bar">
+            <span id="stats">📚 جاري تحميل البيانات...</span>
+        </div>
+
+        <div class="results-section">
+            <div class="results-header" id="resultsHeader" style="display: none;">
+                <div class="results-count" id="resultsCount">0 نتيجة</div>
+                <div class="results-count">🔄 جرب كلمات مختلفة</div>
             </div>
-
-            <div class="results-section">
-                <div class="results-header" id="resultsHeader" style="display: none;">
-                    <div class="results-count" id="resultsCount">0 نتيجة</div>
-                    <div class="results-count">🔄 جرب كلمات مختلفة لكل بحث جديد</div>
-                </div>
-                <div class="results-grid" id="resultsGrid">
-                    <div class="empty-message">
-                        ✨ اكتب كلمة في البحث وستظهر النتائج هنا
-                    </div>
+            <div class="results-grid" id="resultsGrid">
+                <div class="empty-message">
+                    ✨ اكتب كلمة في البحث وستظهر النتائج هنا
                 </div>
             </div>
         </div>
 
         <footer>
-            © 2026 منصة كلمات - جميع الحقوق محفوظة
+            © 2026 منصة كلمات
         </footer>
     </div>
 
     <script>
-        // قائمة جميع ملفات JSON في الموقع
-        const jsonFiles = [
+        // قائمة جميع ملفات JSON
+        const files = [
             'money-keywords.json',
             'apps-keywords.json',
             'cooking-keywords.json',
@@ -333,34 +241,29 @@
             'common-questions.json'
         ];
 
-        // ترجمة أسماء المجالات
+        // أسماء المجالات للعرض
         const categoryNames = {
-            'money': '💰 الربح من الإنترنت',
-            'apps': '📱 تطبيقات الربح',
-            'cooking': '🍳 الطبخ',
-            'marketing': '📈 التسويق',
-            'socialmedia': '📱 سوشيال ميديا',
-            'work_online': '💼 العمل عبر الإنترنت',
-            'common_questions': '❓ أسئلة شائعة'
+            'money': '💰 الربح',
+            'apps': '📱 تطبيقات',
+            'cooking': '🍳 طبخ',
+            'marketing': '📈 تسويق',
+            'socialmedia': '📱 سوشيال',
+            'work_online': '💼 عمل',
+            'common_questions': '❓ أسئلة'
         };
 
-        let allKeywords = [];
-        let totalKeywords = 0;
-        let loadedFiles = 0;
+        let allData = [];
+        let isLoading = true;
 
-        // تحميل جميع الكلمات عند بدء الصفحة
+        // تحميل البيانات عند بدء الصفحة
         window.onload = async function() {
-            await loadAllKeywords();
+            await loadAllFiles();
         };
 
-        // تحميل جميع الكلمات من جميع الملفات
-        async function loadAllKeywords() {
-            document.getElementById('statsBar').innerHTML = '<div class="stat-item">⏳ جاري تحميل قواعد البيانات...</div>';
+        async function loadAllFiles() {
+            document.getElementById('stats').innerHTML = '⏳ جاري التحميل...';
             
-            allKeywords = [];
-            loadedFiles = 0;
-            
-            for (let file of jsonFiles) {
+            for (let file of files) {
                 try {
                     const response = await fetch(file);
                     if (response.ok) {
@@ -368,155 +271,90 @@
                         const categoryId = Object.keys(data)[0];
                         const categoryData = data[categoryId];
                         const categoryName = categoryNames[categoryId] || categoryId;
-                        
-                        console.log(`تم تحميل ${file}:`, categoryData);
-                        
-                        // دالة مساعدة لإضافة الكلمات
-                        const addKeywords = (items, type) => {
-                            if (items && Array.isArray(items)) {
-                                items.forEach(item => {
-                                    if (typeof item === 'string') {
-                                        allKeywords.push({
-                                            text: item,
-                                            category: categoryName,
-                                            type: type
-                                        });
-                                    } else if (item && typeof item === 'object' && item.keyword) {
-                                        allKeywords.push({
-                                            text: item.keyword,
-                                            category: categoryName,
-                                            type: type
+
+                        // جمع كل الكلمات
+                        const sections = ['main_keywords', 'long_tail_keywords', 'questions'];
+                        sections.forEach(section => {
+                            if (categoryData[section]) {
+                                categoryData[section].forEach(item => {
+                                    const text = typeof item === 'string' ? item : item.keyword || '';
+                                    if (text) {
+                                        allData.push({
+                                            text: text,
+                                            category: categoryName
                                         });
                                     }
                                 });
                             }
-                        };
-                        
-                        // إضافة الكلمات الرئيسية
-                        if (categoryData.main_keywords) {
-                            addKeywords(categoryData.main_keywords, 'كلمة رئيسية');
-                        } else if (categoryData.main) {
-                            addKeywords(categoryData.main, 'كلمة رئيسية');
-                        }
-                        
-                        // إضافة الكلمات الطويلة
-                        if (categoryData.long_tail_keywords) {
-                            addKeywords(categoryData.long_tail_keywords, 'كلمة ذيل طويل');
-                        } else if (categoryData.long) {
-                            addKeywords(categoryData.long, 'كلمة ذيل طويل');
-                        }
-                        
-                        // إضافة الأسئلة
-                        if (categoryData.questions) {
-                            addKeywords(categoryData.questions, 'سؤال');
-                        }
-                        
-                        loadedFiles++;
-                    } else {
-                        console.log(`الملف غير موجود: ${file}`);
+                        });
                     }
-                } catch (error) {
-                    console.log('خطأ في تحميل', file, error);
+                } catch (e) {
+                    console.log('خطأ في تحميل', file);
                 }
             }
-            
-            totalKeywords = allKeywords.length;
-            
-            console.log(`تم تحميل ${totalKeywords} كلمة من ${loadedFiles} ملفات`);
-            
-            // تحديث الإحصائيات
-            document.getElementById('statsBar').innerHTML = `
-                <div class="stat-item">📚 ${totalKeywords} كلمة مفتاحية</div>
-                <div class="stat-item">📁 ${loadedFiles} مجال</div>
-                <div class="stat-item">⚡ بحث فوري</div>
-            `;
+
+            isLoading = false;
+            document.getElementById('stats').innerHTML = `📚 ${allData.length} كلمة من ${files.length} ملفات`;
         }
 
-        // البحث في جميع الكلمات
-        function searchAllKeywords() {
+        function searchAll() {
             const query = document.getElementById('searchInput').value.trim().toLowerCase();
             
             if (!query) {
-                alert('الرجاء إدخال كلمة للبحث');
+                alert('اكتب كلمة للبحث');
                 return;
             }
 
-            // إظهار رسالة تحميل
-            document.getElementById('resultsGrid').innerHTML = '<div class="loading-message">🔍 جاري البحث...</div>';
-            document.getElementById('resultsHeader').style.display = 'none';
+            if (isLoading) {
+                alert('جاري تحميل البيانات، انتظر قليلاً');
+                return;
+            }
 
-            // تأخير بسيط لإظهار حركة البحث
-            setTimeout(() => {
-                // البحث في جميع الكلمات
-                const results = allKeywords.filter(item => 
-                    item.text.toLowerCase().includes(query)
-                );
+            // البحث
+            const results = allData.filter(item => 
+                item.text.toLowerCase().includes(query)
+            );
 
-                // عرض النتائج
-                displayResults(results, query);
-            }, 300);
-        }
-
-        // عرض نتائج البحث
-        function displayResults(results, query) {
+            // عرض النتائج
             const grid = document.getElementById('resultsGrid');
             const header = document.getElementById('resultsHeader');
             const countSpan = document.getElementById('resultsCount');
 
             if (results.length === 0) {
-                grid.innerHTML = `
-                    <div class="empty-message">
-                        ❌ لا توجد نتائج لـ "${query}"<br>
-                        <small>جرب كلمة أخرى مثل: ربح، طبخ، تسويق، تطبيقات، عمل</small>
-                    </div>
-                `;
+                grid.innerHTML = `<div class="empty-message">❌ لا توجد نتائج لـ "${query}"</div>`;
                 header.style.display = 'none';
                 return;
             }
 
-            // عرض عدد النتائج
-            countSpan.textContent = `${results.length} نتيجة لـ "${query}"`;
+            countSpan.textContent = `${results.length} نتيجة`;
             header.style.display = 'flex';
 
-            // عرض النتائج
-            let html = '';
-            
-            // خلط النتائج عشوائياً لإعطاء انطباع مختلف كل مرة
+            // خلط النتائج وعرض 40 فقط
             const shuffled = [...results].sort(() => Math.random() - 0.5);
-            
-            // أخذ أول 50 نتيجة فقط (لعدم إرباك المستخدم)
-            const topResults = shuffled.slice(0, 50);
-            
+            const topResults = shuffled.slice(0, 40);
+
+            let html = '';
             topResults.forEach(item => {
                 html += `
-                    <div class="keyword-card" onclick="copyKeyword('${item.text.replace(/'/g, "\\'")}')">
+                    <div class="keyword-card" onclick="copyText('${item.text.replace(/'/g, "\\'")}')">
                         ${item.text}
-                        <div class="keyword-source">${item.category} | ${item.type}</div>
+                        <div class="keyword-source">${item.category}</div>
                     </div>
                 `;
             });
 
-            if (results.length > 50) {
-                html += `<div class="keyword-card" style="background: #f0f2f5;">و ${results.length - 50} نتيجة أخرى...</div>`;
-            }
-
             grid.innerHTML = html;
         }
 
-        // نسخ الكلمة
-        function copyKeyword(text) {
+        function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('✅ تم نسخ: ' + text);
-            }).catch(() => {
-                alert('📋 يمكنك نسخ الكلمة يدوياً');
+                alert('✅ تم النسخ');
             });
         }
 
-        // البحث عند الضغط على Enter
+        // بحث عند الضغط على Enter
         document.getElementById('searchInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchAllKeywords();
-            }
+            if (e.key === 'Enter') searchAll();
         });
     </script>
 </body>
