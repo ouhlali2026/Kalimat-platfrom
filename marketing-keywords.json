@@ -2,9 +2,7 @@
   "marketing": {
     "name": "التسويق",
     "category": "تسويق",
-    "last_updated": "فبراير 2026",
-    "disclaimer": "أحجام البحث تقريبية وقد تختلف حسب الموسم والمنطقة",
-    "main_keywords": [
+    "main": [
       {"keyword": "التسويق الرقمي", "volume": "450k", "trend": "up"},
       {"keyword": "التسويق الإلكتروني", "volume": "380k", "trend": "up"},
       {"keyword": "التسويق عبر وسائل التواصل", "volume": "320k", "trend": "up"},
@@ -153,6 +151,8 @@
       {"keyword": "التسويق في موسم العودة للمدارس", "volume": "95k", "trend": "seasonal"},
       {"keyword": "التسويق في الشتاء", "volume": "50k", "trend": "seasonal"},
       {"keyword": "التسويق في الصيف", "volume": "55k", "trend": "seasonal"}
-    ]
+    ],
+    "long": [],
+    "questions": []
   }
 }
