@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -91,17 +91,16 @@
             border-radius: 30px;
             padding: 40px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            text-align: center;
         }
 
         h2 {
             font-size: 2.2em;
             color: #333;
             margin-bottom: 15px;
-            text-align: center;
         }
 
         .subtitle {
-            text-align: center;
             color: #666;
             margin-bottom: 40px;
             font-size: 1.1em;
@@ -110,14 +109,17 @@
         /* مربع البحث */
         .search-section {
             background: #f8f9fa;
-            border-radius: 20px;
-            padding: 30px;
+            border-radius: 50px;
+            padding: 10px;
             margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .search-box {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
@@ -126,9 +128,10 @@
             min-width: 250px;
             padding: 18px 25px;
             border: 2px solid #e0e0e0;
-            border-radius: 15px;
+            border-radius: 50px;
             font-size: 1.1em;
             transition: all 0.3s;
+            background: white;
         }
 
         .search-box input:focus {
@@ -142,7 +145,7 @@
             color: white;
             border: none;
             padding: 0 40px;
-            border-radius: 15px;
+            border-radius: 50px;
             font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
@@ -155,122 +158,76 @@
             box-shadow: 0 10px 20px rgba(102,126,234,0.3);
         }
 
-        /* أزرار النيشات */
-        .niches-bar {
-            margin: 30px 0;
-        }
-
-        .niches-title {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .niches-grid {
+        /* إحصائيات سريعة */
+        .stats-bar {
             display: flex;
-            gap: 15px;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
         }
 
-        .niche-btn {
-            padding: 15px 30px;
+        .stat-item {
             background: white;
-            border: 2px solid #667eea;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.1em;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             font-weight: 600;
             color: #667eea;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            flex: 0 1 auto;
         }
 
-        .niche-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102,126,234,0.2);
+        /* نتائج البحث */
+        .results-section {
+            margin-top: 30px;
         }
 
-        .niche-btn.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-color: transparent;
-        }
-
-        /* تبويبات الكلمات */
-        .tabs-section {
-            margin: 30px 0;
-        }
-
-        .tabs {
+        .results-header {
             display: flex;
-            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
             flex-wrap: wrap;
+        }
+
+        .results-count {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .results-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
             justify-content: center;
         }
 
-        .tab {
-            padding: 12px 30px;
-            background: #f0f2f5;
-            border: none;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.1em;
-            font-weight: 500;
-        }
-
-        .tab:hover {
-            background: #e0e4e9;
-        }
-
-        .tab.active {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            box-shadow: 0 5px 15px rgba(102,126,234,0.3);
-        }
-
-        .keyword-count {
-            font-size: 0.9em;
-            margin-right: 8px;
-            opacity: 0.9;
-        }
-
-        /* شبكة الكلمات */
-        .keywords-grid {
+        .keyword-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            min-height: 400px;
-            border: 2px dashed #667eea;
-            margin-top: 20px;
-        }
-
-        .keywords-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .keyword-chip {
-            display: inline-block;
-            padding: 12px 25px;
-            background: linear-gradient(135deg, #f8f9fa, #ffffff);
-            border: 1px solid #e0e0e0;
+            padding: 15px 25px;
             border-radius: 40px;
+            border: 1px solid #e0e0e0;
             cursor: pointer;
             transition: all 0.3s;
             font-size: 1em;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
         }
 
-        .keyword-chip:hover {
+        .keyword-card:hover {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-color: transparent;
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(102,126,234,0.3);
+        }
+
+        .keyword-source {
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 5px;
         }
 
         .loading-message {
@@ -311,26 +268,12 @@
                 padding: 20px;
             }
 
-            h2 {
-                font-size: 1.8em;
-            }
-
             .search-box button {
                 width: 100%;
                 padding: 15px;
             }
 
-            .niche-btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .tab {
-                width: 100%;
-                text-align: center;
-            }
-
-            .keyword-chip {
+            .stat-item {
                 width: 100%;
                 text-align: center;
             }
@@ -341,7 +284,7 @@
     <div class="container">
         <header>
             <h1>🔑 منصة كلمات</h1>
-            <p>بنك الكلمات المفتاحية الذكي لصناع المحتوى</p>
+            <p>ابحث عن آلاف الكلمات المفتاحية في جميع المجالات</p>
         </header>
 
         <nav>
@@ -355,39 +298,28 @@
 
         <div class="content-box">
             <h2>🔍 بنك الكلمات المفتاحية</h2>
-            <p class="subtitle">اختر المجال الذي تريد، وانسخ الكلمات التي تحتاجها</p>
+            <p class="subtitle">اكتب أي كلمة وستحصل على نتائج من جميع المجالات</p>
+
+            <div class="stats-bar" id="statsBar">
+                <div class="stat-item">📊 جاري تحميل البيانات...</div>
+            </div>
 
             <div class="search-section">
                 <div class="search-box">
-                    <input type="text" id="searchInput" placeholder="ابحث عن كلمة في جميع المجالات...">
-                    <button onclick="searchAllKeywords()">🔍 بحث شامل</button>
+                    <input type="text" id="searchInput" placeholder="ابحث عن كلمة... (مثال: طبخ، تسويق، تطبيقات)" autofocus>
+                    <button onclick="searchAllKeywords()">🔍 بحث</button>
                 </div>
             </div>
 
-            <div class="niches-bar">
-                <div class="niches-title">📂 المجالات المتاحة:</div>
-                <div class="niches-grid" id="nichesList">
-                    <div class="loading-message">جاري تحميل المجالات...</div>
+            <div class="results-section">
+                <div class="results-header" id="resultsHeader" style="display: none;">
+                    <div class="results-count" id="resultsCount">0 نتيجة</div>
+                    <div class="results-count">🔄 جرب كلمات مختلفة لكل بحث جديد</div>
                 </div>
-            </div>
-
-            <div class="tabs-section">
-                <div class="tabs" id="tabsContainer">
-                    <button class="tab active" onclick="filterKeywords('main')">
-                        كلمات رئيسية <span class="keyword-count" id="mainCount">(0)</span>
-                    </button>
-                    <button class="tab" onclick="filterKeywords('long')">
-                        كلمات ذيل طويل <span class="keyword-count" id="longCount">(0)</span>
-                    </button>
-                    <button class="tab" onclick="filterKeywords('questions')">
-                        أسئلة الناس <span class="keyword-count" id="questionsCount">(0)</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="keywords-grid">
-                <div class="keywords-container" id="keywordsContainer">
-                    <div class="loading-message">✨ اختر مجالاً من الأعلى لعرض الكلمات</div>
+                <div class="results-grid" id="resultsGrid">
+                    <div class="empty-message">
+                        ✨ اكتب كلمة في البحث وستظهر النتائج هنا
+                    </div>
                 </div>
             </div>
         </div>
@@ -398,180 +330,162 @@
     </div>
 
     <script>
-        // المتغيرات العامة
-        let availableNiches = [];
-        let nichesData = {};
-        let currentNiche = null;
-        let currentType = 'main';
-
-        // أسماء ملفات JSON الممكنة (أسماء عامة)
-        const possibleFiles = [
+        // قائمة ملفات JSON
+        const jsonFiles = [
             'money-keywords.json',
-            'apps-keywords.json', 
+            'apps-keywords.json',
             'cooking-keywords.json',
-            'tech-keywords.json',
-            'beauty-keywords.json',
-            'sports-keywords.json',
-            'travel-keywords.json',
-            'education-keywords.json',
-            'health-keywords.json',
-            'fashion-keywords.json',
-            'parenting-keywords.json',
-            'business-keywords.json',
-            'gaming-keywords.json',
             'marketing-keywords.json',
-            'design-keywords.json',
-            'writing-keywords.json',
-            'photography-keywords.json',
-            'music-keywords.json',
-            'art-keywords.json',
-            'crafts-keywords.json'
+            'socialmedia-keywords.json'
         ];
 
-        // دالة تحويل اسم الملف إلى اسم عرض جميل
-        function getNicheNameFromFile(filename) {
-            const nameMap = {
-                'money': '💰 الربح من الإنترنت',
-                'apps': '📱 تطبيقات الربح',
-                'cooking': '🍳 الطبخ',
-                'tech': '💻 التقنية',
-                'beauty': '✨ التجميل',
-                'sports': '⚽ الرياضة',
-                'travel': '✈️ السفر',
-                'education': '📚 التعليم',
-                'health': '🏥 الصحة',
-                'fashion': '👗 الموضة',
-                'parenting': '👶 تربية الأطفال',
-                'business': '💼 الأعمال',
-                'gaming': '🎮 الألعاب',
-                'marketing': '📈 التسويق',
-                'design': '🎨 التصميم',
-                'writing': '✍️ الكتابة',
-                'photography': '📸 التصوير',
-                'music': '🎵 الموسيقى',
-                'art': '🖼️ الفن',
-                'crafts': '🧶 الحرف اليدوية'
-            };
-            
-            // استخراج الجزء الأول من اسم الملف (قبل -keywords)
-            const key = filename.replace('-keywords.json', '');
-            return nameMap[key] || `📁 ${key}`;
-        }
-
-        // بدء التحميل
-        window.onload = function() {
-            loadAllNiches();
+        // ترجمة أسماء المجالات
+        const categoryNames = {
+            'money': '💰 الربح من الإنترنت',
+            'apps': '📱 تطبيقات',
+            'cooking': '🍳 الطبخ',
+            'marketing': '📈 التسويق',
+            'socialmedia': '📱 سوشيال ميديا'
         };
 
-        // تحميل جميع ملفات JSON الموجودة
-        async function loadAllNiches() {
-            const nichesList = document.getElementById('nichesList');
+        let allKeywords = [];
+        let totalKeywords = 0;
+
+        // تحميل جميع الكلمات عند بدء الصفحة
+        window.onload = async function() {
+            await loadAllKeywords();
+        };
+
+        // تحميل جميع الكلمات من جميع الملفات
+        async function loadAllKeywords() {
+            document.getElementById('statsBar').innerHTML = '<div class="stat-item">⏳ جاري تحميل قواعد البيانات...</div>';
             
-            // تجربة تحميل كل ملف
-            for (let file of possibleFiles) {
+            for (let file of jsonFiles) {
                 try {
                     const response = await fetch(file);
                     if (response.ok) {
                         const data = await response.json();
+                        const categoryId = Object.keys(data)[0];
+                        const categoryData = data[categoryId];
+                        const categoryName = categoryNames[categoryId] || categoryId;
                         
-                        // استخراج المفتاح الرئيسي (أول مفتاح في الكائن)
-                        const mainKey = Object.keys(data)[0];
+                        // إضافة الكلمات الرئيسية
+                        if (categoryData.main_keywords) {
+                            categoryData.main_keywords.forEach(keyword => {
+                                allKeywords.push({
+                                    text: keyword,
+                                    category: categoryName,
+                                    type: 'كلمة رئيسية'
+                                });
+                            });
+                        }
                         
-                        if (mainKey && data[mainKey]) {
-                            nichesData[mainKey] = data[mainKey];
-                            availableNiches.push({
-                                id: mainKey,
-                                name: getNicheNameFromFile(file),
-                                file: file,
-                                data: data[mainKey]
+                        // إضافة الكلمات الطويلة
+                        if (categoryData.long_tail_keywords) {
+                            categoryData.long_tail_keywords.forEach(keyword => {
+                                allKeywords.push({
+                                    text: keyword,
+                                    category: categoryName,
+                                    type: 'كلمة ذيل طويل'
+                                });
+                            });
+                        }
+                        
+                        // إضافة الأسئلة
+                        if (categoryData.questions) {
+                            categoryData.questions.forEach(keyword => {
+                                allKeywords.push({
+                                    text: keyword,
+                                    category: categoryName,
+                                    type: 'سؤال'
+                                });
                             });
                         }
                     }
                 } catch (error) {
-                    // الملف غير موجود - نتجاهل
+                    console.log('خطأ في تحميل', file);
                 }
             }
-
-            // عرض الأزرار حسب الملفات الموجودة
-            if (availableNiches.length > 0) {
-                let html = '';
-                availableNiches.forEach((niche, index) => {
-                    const activeClass = index === 0 ? 'active' : '';
-                    html += `<button class="niche-btn ${activeClass}" onclick="selectNiche('${niche.id}')">${niche.name}</button>`;
-                });
-                nichesList.innerHTML = html;
-
-                // اختيار أول نيش
-                if (availableNiches.length > 0) {
-                    selectNiche(availableNiches[0].id);
-                }
-            } else {
-                nichesList.innerHTML = '<div class="empty-message">لا توجد ملفات JSON مضافة. أضف ملفاً وستظهر تلقائياً</div>';
-            }
+            
+            totalKeywords = allKeywords.length;
+            
+            // تحديث الإحصائيات
+            document.getElementById('statsBar').innerHTML = `
+                <div class="stat-item">📚 ${totalKeywords} كلمة مفتاحية</div>
+                <div class="stat-item">📁 ${jsonFiles.length} مجال</div>
+                <div class="stat-item">⚡ بحث فوري</div>
+            `;
         }
 
-        // اختيار نيش معين
-        function selectNiche(nicheId) {
-            currentNiche = nichesData[nicheId];
+        // البحث في جميع الكلمات
+        function searchAllKeywords() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
             
-            // تحديث الأزرار
-            document.querySelectorAll('.niche-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            // تحديث العدادات
-            updateCounts();
-            
-            // عرض الكلمات
-            filterKeywords(currentType);
-        }
-
-        // تحديث أعداد الكلمات
-        function updateCounts() {
-            if (!currentNiche) return;
-            
-            document.getElementById('mainCount').textContent = `(${currentNiche.main_keywords?.length || 0})`;
-            document.getElementById('longCount').textContent = `(${currentNiche.long_tail_keywords?.length || 0})`;
-            document.getElementById('questionsCount').textContent = `(${currentNiche.questions?.length || 0})`;
-        }
-
-        // تصفية الكلمات حسب النوع
-        function filterKeywords(type) {
-            if (!currentNiche) {
-                alert('الرجاء اختيار مجال أولاً');
+            if (!query) {
+                alert('الرجاء إدخال كلمة للبحث');
                 return;
             }
 
-            currentType = type;
+            // إظهار رسالة تحميل
+            document.getElementById('resultsGrid').innerHTML = '<div class="loading-message">🔍 جاري البحث...</div>';
+            document.getElementById('resultsHeader').style.display = 'none';
 
-            // تحديث التبويبات
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+            // تأخير بسيط لإظهار حركة البحث
+            setTimeout(() => {
+                // البحث في جميع الكلمات
+                const results = allKeywords.filter(item => 
+                    item.text.toLowerCase().includes(query)
+                );
 
-            // اختيار الكلمات
-            let keywords = [];
-            if (type === 'main') keywords = currentNiche.main_keywords || [];
-            else if (type === 'long') keywords = currentNiche.long_tail_keywords || [];
-            else if (type === 'questions') keywords = currentNiche.questions || [];
-
-            displayKeywords(keywords);
+                // عرض النتائج
+                displayResults(results, query);
+            }, 300);
         }
 
-        // عرض الكلمات
-        function displayKeywords(keywords) {
-            const container = document.getElementById('keywordsContainer');
-            
-            if (!keywords || keywords.length === 0) {
-                container.innerHTML = '<div class="empty-message">لا توجد كلمات في هذا القسم</div>';
+        // عرض نتائج البحث
+        function displayResults(results, query) {
+            const grid = document.getElementById('resultsGrid');
+            const header = document.getElementById('resultsHeader');
+            const countSpan = document.getElementById('resultsCount');
+
+            if (results.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-message">
+                        ❌ لا توجد نتائج لـ "${query}"<br>
+                        <small>جرب كلمة أخرى</small>
+                    </div>
+                `;
+                header.style.display = 'none';
                 return;
             }
 
+            // عرض عدد النتائج
+            countSpan.textContent = `${results.length} نتيجة لـ "${query}"`;
+            header.style.display = 'flex';
+
+            // عرض النتائج
             let html = '';
-            keywords.forEach(keyword => {
-                const cleanKeyword = keyword.replace(/'/g, "\\'");
-                html += `<span class="keyword-chip" onclick="copyKeyword('${cleanKeyword}')">${keyword}</span>`;
-            });
             
-            container.innerHTML = html;
+            // خلط النتائج عشوائياً لإعطاء انطباع مختلف كل مرة
+            const shuffled = [...results].sort(() => Math.random() - 0.5);
+            
+            // أخذ أول 50 نتيجة فقط (لعدم إرباك المستخدم)
+            const topResults = shuffled.slice(0, 50);
+            
+            topResults.forEach(item => {
+                html += `
+                    <div class="keyword-card" onclick="copyKeyword('${item.text.replace(/'/g, "\\'")}')">
+                        ${item.text}
+                        <div class="keyword-source">${item.category} | ${item.type}</div>
+                    </div>
+                `;
+            });
+
+            if (results.length > 50) {
+                html += `<div class="keyword-card" style="background: #f0f2f5;">و ${results.length - 50} نتيجة أخرى...</div>`;
+            }
+
+            grid.innerHTML = html;
         }
 
         // نسخ الكلمة
@@ -583,32 +497,12 @@
             });
         }
 
-        // البحث الشامل في جميع المجالات
-        async function searchAllKeywords() {
-            const query = document.getElementById('searchInput').value.trim().toLowerCase();
-            if (!query) {
-                alert('الرجاء إدخال كلمة للبحث');
-                return;
+        // البحث عند الضغط على Enter
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchAllKeywords();
             }
-
-            document.getElementById('keywordsContainer').innerHTML = '<div class="loading-message">جاري البحث في جميع المجالات...</div>';
-
-            let results = [];
-            for (let id in nichesData) {
-                const data = nichesData[id];
-                results = results.concat(
-                    (data.main_keywords || []).filter(k => k && k.includes(query)),
-                    (data.long_tail_keywords || []).filter(k => k && k.includes(query)),
-                    (data.questions || []).filter(k => k && k.includes(query))
-                );
-            }
-
-            if (results.length > 0) {
-                displayKeywords(results);
-            } else {
-                document.getElementById('keywordsContainer').innerHTML = '<div class="empty-message">❌ لا توجد نتائج للبحث</div>';
-            }
-        }
+        });
     </script>
 </body>
 </html>
