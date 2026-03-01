@@ -23,7 +23,6 @@
             margin: 0 auto;
         }
 
-        /* الهيدر */
         header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -48,7 +47,6 @@
             color: #666;
         }
 
-        /* شريط التنقل */
         nav {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -84,7 +82,6 @@
             box-shadow: 0 5px 15px rgba(102,126,234,0.3);
         }
 
-        /* المحتوى الرئيسي */
         .content-box {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -106,7 +103,6 @@
             font-size: 1.1em;
         }
 
-        /* مربع البحث */
         .search-section {
             background: #f8f9fa;
             border-radius: 50px;
@@ -158,7 +154,6 @@
             box-shadow: 0 10px 20px rgba(102,126,234,0.3);
         }
 
-        /* إحصائيات سريعة */
         .stats-bar {
             display: flex;
             justify-content: center;
@@ -176,7 +171,6 @@
             color: #667eea;
         }
 
-        /* نتائج البحث */
         .results-section {
             margin-top: 30px;
         }
@@ -244,7 +238,6 @@
             font-size: 1.2em;
         }
 
-        /* الفوتر */
         footer {
             text-align: center;
             padding: 30px;
@@ -254,7 +247,6 @@
             opacity: 0.9;
         }
 
-        /* تحسينات الجوال */
         @media (max-width: 768px) {
             body {
                 padding: 10px;
@@ -330,22 +322,65 @@
     </div>
 
     <script>
-        // قائمة ملفات JSON
+        // قائمة جميع ملفات JSON في الموقع
         const jsonFiles = [
+            // الملفات الأساسية
             'money-keywords.json',
             'apps-keywords.json',
             'cooking-keywords.json',
             'marketing-keywords.json',
-            'socialmedia-keywords.json'
+            'socialmedia-keywords.json',
+            
+            // ملفات تقوية الربح من الإنترنت
+            'work-online.json',
+            'common-questions.json',
+            
+            // ملفات إضافية مستقبلية
+            'freelance-keywords.json',
+            'ecommerce-keywords.json',
+            'contentcreation-keywords.json',
+            'copywriting-keywords.json',
+            'fitness-keywords.json',
+            'mentalhealth-keywords.json',
+            'parenting-keywords.json',
+            'relationships-keywords.json',
+            'tech-keywords.json',
+            'education-keywords.json',
+            'selfdev-keywords.json',
+            'languages-keywords.json',
+            'travel-keywords.json',
+            'fashion-keywords.json',
+            'beauty-keywords.json',
+            'home-keywords.json',
+            'gardening-keywords.json'
         ];
 
         // ترجمة أسماء المجالات
         const categoryNames = {
             'money': '💰 الربح من الإنترنت',
-            'apps': '📱 تطبيقات',
+            'apps': '📱 تطبيقات الربح',
             'cooking': '🍳 الطبخ',
             'marketing': '📈 التسويق',
-            'socialmedia': '📱 سوشيال ميديا'
+            'socialmedia': '📱 سوشيال ميديا',
+            'work_online': '💼 العمل عبر الإنترنت',
+            'common_questions': '❓ أسئلة شائعة',
+            'freelance': '🤝 العمل الحر',
+            'ecommerce': '🛒 تجارة إلكترونية',
+            'contentcreation': '🎬 صناعة المحتوى',
+            'copywriting': '✍️ كتابة المحتوى',
+            'fitness': '💪 لياقة ورياضة',
+            'mentalhealth': '🧘 صحة نفسية',
+            'parenting': '👶 تربية أطفال',
+            'relationships': '💑 علاقات',
+            'tech': '💻 تقنية',
+            'education': '📚 تعليم',
+            'selfdev': '🎓 تطوير ذاتي',
+            'languages': '🗣️ تعلم لغات',
+            'travel': '✈️ سفر',
+            'fashion': '👗 موضة',
+            'beauty': '💄 تجميل',
+            'home': '🏠 ديكور ومنزل',
+            'gardening': '🌱 زراعة'
         };
 
         let allKeywords = [];
@@ -360,6 +395,8 @@
         async function loadAllKeywords() {
             document.getElementById('statsBar').innerHTML = '<div class="stat-item">⏳ جاري تحميل قواعد البيانات...</div>';
             
+            let loadedFiles = 0;
+            
             for (let file of jsonFiles) {
                 try {
                     const response = await fetch(file);
@@ -371,36 +408,70 @@
                         
                         // إضافة الكلمات الرئيسية
                         if (categoryData.main_keywords) {
-                            categoryData.main_keywords.forEach(keyword => {
-                                allKeywords.push({
-                                    text: keyword,
-                                    category: categoryName,
-                                    type: 'كلمة رئيسية'
+                            if (Array.isArray(categoryData.main_keywords)) {
+                                // إذا كانت المصفوفة تحتوي على نصوص فقط
+                                categoryData.main_keywords.forEach(keyword => {
+                                    if (typeof keyword === 'string') {
+                                        allKeywords.push({
+                                            text: keyword,
+                                            category: categoryName,
+                                            type: 'كلمة رئيسية'
+                                        });
+                                    } else if (keyword.keyword) {
+                                        // إذا كانت المصفوفة تحتوي على كائنات (بها keyword)
+                                        allKeywords.push({
+                                            text: keyword.keyword,
+                                            category: categoryName,
+                                            type: 'كلمة رئيسية'
+                                        });
+                                    }
                                 });
-                            });
+                            }
                         }
                         
                         // إضافة الكلمات الطويلة
                         if (categoryData.long_tail_keywords) {
-                            categoryData.long_tail_keywords.forEach(keyword => {
-                                allKeywords.push({
-                                    text: keyword,
-                                    category: categoryName,
-                                    type: 'كلمة ذيل طويل'
+                            if (Array.isArray(categoryData.long_tail_keywords)) {
+                                categoryData.long_tail_keywords.forEach(keyword => {
+                                    if (typeof keyword === 'string') {
+                                        allKeywords.push({
+                                            text: keyword,
+                                            category: categoryName,
+                                            type: 'كلمة ذيل طويل'
+                                        });
+                                    } else if (keyword.keyword) {
+                                        allKeywords.push({
+                                            text: keyword.keyword,
+                                            category: categoryName,
+                                            type: 'كلمة ذيل طويل'
+                                        });
+                                    }
                                 });
-                            });
+                            }
                         }
                         
                         // إضافة الأسئلة
                         if (categoryData.questions) {
-                            categoryData.questions.forEach(keyword => {
-                                allKeywords.push({
-                                    text: keyword,
-                                    category: categoryName,
-                                    type: 'سؤال'
+                            if (Array.isArray(categoryData.questions)) {
+                                categoryData.questions.forEach(keyword => {
+                                    if (typeof keyword === 'string') {
+                                        allKeywords.push({
+                                            text: keyword,
+                                            category: categoryName,
+                                            type: 'سؤال'
+                                        });
+                                    } else if (keyword.keyword) {
+                                        allKeywords.push({
+                                            text: keyword.keyword,
+                                            category: categoryName,
+                                            type: 'سؤال'
+                                        });
+                                    }
                                 });
-                            });
+                            }
                         }
+                        
+                        loadedFiles++;
                     }
                 } catch (error) {
                     console.log('خطأ في تحميل', file);
@@ -412,7 +483,7 @@
             // تحديث الإحصائيات
             document.getElementById('statsBar').innerHTML = `
                 <div class="stat-item">📚 ${totalKeywords} كلمة مفتاحية</div>
-                <div class="stat-item">📁 ${jsonFiles.length} مجال</div>
+                <div class="stat-item">📁 ${loadedFiles} مجال</div>
                 <div class="stat-item">⚡ بحث فوري</div>
             `;
         }
@@ -452,7 +523,7 @@
                 grid.innerHTML = `
                     <div class="empty-message">
                         ❌ لا توجد نتائج لـ "${query}"<br>
-                        <small>جرب كلمة أخرى</small>
+                        <small>جرب كلمة أخرى مثل: ربح، طبخ، تسويق، تطبيقات، عمل</small>
                     </div>
                 `;
                 header.style.display = 'none';
