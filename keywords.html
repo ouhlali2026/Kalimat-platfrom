@@ -324,35 +324,13 @@
     <script>
         // قائمة جميع ملفات JSON في الموقع
         const jsonFiles = [
-            // الملفات الأساسية
             'money-keywords.json',
             'apps-keywords.json',
             'cooking-keywords.json',
             'marketing-keywords.json',
             'socialmedia-keywords.json',
-            
-            // ملفات تقوية الربح من الإنترنت
             'work-online.json',
-            'common-questions.json',
-            
-            // ملفات إضافية مستقبلية
-            'freelance-keywords.json',
-            'ecommerce-keywords.json',
-            'contentcreation-keywords.json',
-            'copywriting-keywords.json',
-            'fitness-keywords.json',
-            'mentalhealth-keywords.json',
-            'parenting-keywords.json',
-            'relationships-keywords.json',
-            'tech-keywords.json',
-            'education-keywords.json',
-            'selfdev-keywords.json',
-            'languages-keywords.json',
-            'travel-keywords.json',
-            'fashion-keywords.json',
-            'beauty-keywords.json',
-            'home-keywords.json',
-            'gardening-keywords.json'
+            'common-questions.json'
         ];
 
         // ترجمة أسماء المجالات
@@ -363,28 +341,12 @@
             'marketing': '📈 التسويق',
             'socialmedia': '📱 سوشيال ميديا',
             'work_online': '💼 العمل عبر الإنترنت',
-            'common_questions': '❓ أسئلة شائعة',
-            'freelance': '🤝 العمل الحر',
-            'ecommerce': '🛒 تجارة إلكترونية',
-            'contentcreation': '🎬 صناعة المحتوى',
-            'copywriting': '✍️ كتابة المحتوى',
-            'fitness': '💪 لياقة ورياضة',
-            'mentalhealth': '🧘 صحة نفسية',
-            'parenting': '👶 تربية أطفال',
-            'relationships': '💑 علاقات',
-            'tech': '💻 تقنية',
-            'education': '📚 تعليم',
-            'selfdev': '🎓 تطوير ذاتي',
-            'languages': '🗣️ تعلم لغات',
-            'travel': '✈️ سفر',
-            'fashion': '👗 موضة',
-            'beauty': '💄 تجميل',
-            'home': '🏠 ديكور ومنزل',
-            'gardening': '🌱 زراعة'
+            'common_questions': '❓ أسئلة شائعة'
         };
 
         let allKeywords = [];
         let totalKeywords = 0;
+        let loadedFiles = 0;
 
         // تحميل جميع الكلمات عند بدء الصفحة
         window.onload = async function() {
@@ -395,7 +357,8 @@
         async function loadAllKeywords() {
             document.getElementById('statsBar').innerHTML = '<div class="stat-item">⏳ جاري تحميل قواعد البيانات...</div>';
             
-            let loadedFiles = 0;
+            allKeywords = [];
+            loadedFiles = 0;
             
             for (let file of jsonFiles) {
                 try {
@@ -406,79 +369,60 @@
                         const categoryData = data[categoryId];
                         const categoryName = categoryNames[categoryId] || categoryId;
                         
-                        // إضافة الكلمات الرئيسية
-                        if (categoryData.main_keywords) {
-                            if (Array.isArray(categoryData.main_keywords)) {
-                                // إذا كانت المصفوفة تحتوي على نصوص فقط
-                                categoryData.main_keywords.forEach(keyword => {
-                                    if (typeof keyword === 'string') {
+                        console.log(`تم تحميل ${file}:`, categoryData);
+                        
+                        // دالة مساعدة لإضافة الكلمات
+                        const addKeywords = (items, type) => {
+                            if (items && Array.isArray(items)) {
+                                items.forEach(item => {
+                                    if (typeof item === 'string') {
                                         allKeywords.push({
-                                            text: keyword,
+                                            text: item,
                                             category: categoryName,
-                                            type: 'كلمة رئيسية'
+                                            type: type
                                         });
-                                    } else if (keyword.keyword) {
-                                        // إذا كانت المصفوفة تحتوي على كائنات (بها keyword)
+                                    } else if (item && typeof item === 'object' && item.keyword) {
                                         allKeywords.push({
-                                            text: keyword.keyword,
+                                            text: item.keyword,
                                             category: categoryName,
-                                            type: 'كلمة رئيسية'
+                                            type: type
                                         });
                                     }
                                 });
                             }
+                        };
+                        
+                        // إضافة الكلمات الرئيسية
+                        if (categoryData.main_keywords) {
+                            addKeywords(categoryData.main_keywords, 'كلمة رئيسية');
+                        } else if (categoryData.main) {
+                            addKeywords(categoryData.main, 'كلمة رئيسية');
                         }
                         
                         // إضافة الكلمات الطويلة
                         if (categoryData.long_tail_keywords) {
-                            if (Array.isArray(categoryData.long_tail_keywords)) {
-                                categoryData.long_tail_keywords.forEach(keyword => {
-                                    if (typeof keyword === 'string') {
-                                        allKeywords.push({
-                                            text: keyword,
-                                            category: categoryName,
-                                            type: 'كلمة ذيل طويل'
-                                        });
-                                    } else if (keyword.keyword) {
-                                        allKeywords.push({
-                                            text: keyword.keyword,
-                                            category: categoryName,
-                                            type: 'كلمة ذيل طويل'
-                                        });
-                                    }
-                                });
-                            }
+                            addKeywords(categoryData.long_tail_keywords, 'كلمة ذيل طويل');
+                        } else if (categoryData.long) {
+                            addKeywords(categoryData.long, 'كلمة ذيل طويل');
                         }
                         
                         // إضافة الأسئلة
                         if (categoryData.questions) {
-                            if (Array.isArray(categoryData.questions)) {
-                                categoryData.questions.forEach(keyword => {
-                                    if (typeof keyword === 'string') {
-                                        allKeywords.push({
-                                            text: keyword,
-                                            category: categoryName,
-                                            type: 'سؤال'
-                                        });
-                                    } else if (keyword.keyword) {
-                                        allKeywords.push({
-                                            text: keyword.keyword,
-                                            category: categoryName,
-                                            type: 'سؤال'
-                                        });
-                                    }
-                                });
-                            }
+                            addKeywords(categoryData.questions, 'سؤال');
                         }
                         
                         loadedFiles++;
+                    } else {
+                        console.log(`الملف غير موجود: ${file}`);
                     }
                 } catch (error) {
-                    console.log('خطأ في تحميل', file);
+                    console.log('خطأ في تحميل', file, error);
                 }
             }
             
             totalKeywords = allKeywords.length;
+            
+            console.log(`تم تحميل ${totalKeywords} كلمة من ${loadedFiles} ملفات`);
             
             // تحديث الإحصائيات
             document.getElementById('statsBar').innerHTML = `
